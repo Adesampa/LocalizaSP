@@ -1,74 +1,145 @@
-# API de Geolocalização para São Paulo
+# LocalizaSP API
 
-Esta API fornece informações sobre distritos e subprefeituras da cidade de São Paulo com base em coordenadas geográficas (latitude e longitude).
+![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-## Funcionalidades
+API de geolocalização para consulta de distritos e subprefeituras da cidade de São Paulo.
 
-- Obter o distrito com base nas coordenadas
-- Obter a subprefeitura com base nas coordenadas
-- Obter tanto o distrito quanto a subprefeitura com base nas coordenadas
-- Verificar o status da API
+## Sumário
+
+- [Descrição](#descrição)
+- [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Pré-requisitos](#pré-requisitos)
+- [Instalação](#instalação)
+- [Como Executar a Aplicação](#como-executar-a-aplicação)
+- [Como Utilizar a API](#como-utilizar-a-api)
+- [Exemplos de Uso](#exemplos-de-uso)
+- [Parando os Contêineres](#parando-os-contêineres)
+- [Limpeza](#limpeza-opcional)
+- [Contribuição](#contribuição)
+- [Problemas Conhecidos / FAQ](#problemas-conhecidos--faq)
+- [Contato](#contato)
+- [Licença](#licença)
+
+## Descrição
+
+A LocalizaSP API permite que usuários consultem, a partir de coordenadas geográficas, a qual distrito e subprefeitura essas coordenadas pertencem na cidade de São Paulo. A API utiliza um banco de dados PostgreSQL com extensão PostGIS para realizar consultas espaciais.
+
+## Tecnologias Utilizadas
+
+- Python 3.11
+- Flask
+- PostgreSQL 16 com PostGIS
+- Docker e Docker Compose
 
 ## Pré-requisitos
+
+Certifique-se de ter os seguintes softwares instalados em sua máquina:
+
 - Git
 - Docker
 - Docker Compose
 
-## Configuração e Execução
+## Instalação
 
 1. Clone o repositório:
-   ```
-   git clone git@github.com:Adesampa/LocalizaSP.git
-   cd LocalizaSP
+   ```bash
+   git clone https://github.com/seu-usuario/localizasp.git
+   cd localizasp
    ```
 
-3. Execute o Docker Compose para iniciar a aplicação:
+2. A estrutura do projeto deve ser a seguinte:
    ```
+   ├── docker-compose.yml
+   ├── api
+   │   ├── app.py
+   │   ├── requirements.txt
+   │   └── [outros arquivos da API]
+   └── db
+       ├── Dockerfile
+       ├── load_data.sql
+       ├── import_shapefile.sh
+       ├── distritos/
+       │   └── distritos.shp
+       │   └── [outros arquivos do shapefile]
+       └── [outros arquivos do banco de dados]
+   ```
+
+## Como Executar a Aplicação
+
+1. Na raiz do projeto, execute:
+   ```bash
    docker-compose up --build
    ```
 
-A API estará disponível em `http://localhost:5000`.
+2. Verifique se a API está funcionando acessando:
+   ```
+   http://localhost:5000/
+   ```
 
-## Endpoints
+## Como Utilizar a API
+
+A API oferece os seguintes endpoints:
 
 - `GET /`: Verifica o status da API
 - `GET /distritos?lat=<latitude>&lon=<longitude>`: Retorna o distrito
 - `GET /subprefeituras?lat=<latitude>&lon=<longitude>`: Retorna a subprefeitura
 - `GET /distritos_subprefeituras?lat=<latitude>&lon=<longitude>`: Retorna o distrito e a subprefeitura
 
-## Exemplos de uso
+## Exemplos de Uso
 
-1. Verificar o status da API:
-   ```
-   curl "http://localhost:5000/"
-   ```
-
-2. Obter o distrito para uma coordenada específica:
-   ```
-   curl "http://localhost:5000/distritos?lat=-23.550520&lon=-46.633309"
+1. Consultar Distrito:
+   ```bash
+   curl "http://localhost:5000/distritos?lat=-23.55052&lon=-46.63331"
    ```
 
-3. Obter a subprefeitura para uma coordenada específica:
-   ```
-   curl "http://localhost:5000/subprefeituras?lat=-23.550520&lon=-46.633309"
-   ```
-
-4. Obter tanto o distrito quanto a subprefeitura:
-   ```
-   curl "http://localhost:5000/distritos_subprefeituras?lat=-23.550520&lon=-46.633309"
+2. Consultar Subprefeitura:
+   ```bash
+   curl "http://localhost:5000/subprefeituras?lat=-23.55052&lon=-46.63331"
    ```
 
-Exemplo de resposta:
+3. Consultar Distrito e Subprefeitura:
+   ```bash
+   curl "http://localhost:5000/distritos_subprefeituras?lat=-23.55052&lon=-46.63331"
+   ```
 
-json
-{
-"Distrito": "SÉ",
-"Subprefeitura": "SÉ"
-}
+## Parando os Contêineres
+
+Para parar os contêineres em execução, execute:
+
+```bash
+docker-compose down  
+```
+
+## Limpeza (Opcional)
+
+Para remover todos os contêineres, imagens e volumes associados ao projeto:
+
+```bash
+docker-compose down --rmi all --volumes
+```
 
 
-## Notas
+> **Atenção**: Isso irá remover todos os dados armazenados no banco de dados.
 
-- Certifique-se de que as coordenadas fornecidas estejam dentro dos limites da cidade de São Paulo.
-- A API utiliza um banco de dados PostgreSQL com extensão PostGIS para realizar as consultas geoespaciais.
-- Em caso de erro ou coordenadas não encontradas, a API retornará uma mensagem de erro apropriada.
+## Contribuição
+
+Contribuições são bem-vindas! Por favor, leia o guia de contribuição para saber como você pode contribuir para este projeto.
+
+## Problemas Conhecidos / FAQ
+
+- **P: A API retorna erro 404 para algumas coordenadas. Por quê?**
+  R: Certifique-se de que as coordenadas fornecidas estão dentro dos limites da cidade de São Paulo.
+
+- **P: Como posso adicionar novos distritos ou subprefeituras?**
+  R: Atualize o arquivo shapefile na pasta `db/distritos/` e reconstrua os contêineres Docker.
+
+## Contato
+
+Seu Nome - [@seutwitter](https://twitter.com/seutwitter) - email@example.com
+
+Link do Projeto: [https://github.com/seu-usuario/localizasp](https://github.com/seu-usuario/localizasp)
+
+## Licença
+
+Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
