@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=adesampa
+      - DB_USER=hugo
+      - DB_PASSWORD=adesampa
+
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      - POSTGRES_DB=adesampa
+      - POSTGRES_USER=hugo
+      - POSTGRES_PASSWORD=adesampa
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./distritos:/app/distritos
+      - ./load_data.sql:/docker-entrypoint-initdb.d/load_data.sql
+volumes:
+  postgres_data:
