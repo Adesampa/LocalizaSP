@@ -9,4 +9,3 @@ RUN apt-get update && \
 COPY load_data.sql /docker-entrypoint-initdb.d/
 COPY distritos/ /app/distritos/
 COPY import_shapefile.sh /docker-entrypoint-initdb.d/import_shapefile.sh
-
