@@ -1,8 +1,5 @@
 # LocalizaSP API
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000)
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-
 API de geolocalização para consulta de distritos e subprefeituras da cidade de São Paulo.
 
 ## Sumário
@@ -44,8 +41,8 @@ Certifique-se de ter os seguintes softwares instalados em sua máquina:
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/localizasp.git
-   cd localizasp
+   git clone git@github.com:Adesampa/LocalizaSP.git
+   cd LocalizaSP
    ```
 
 2. A estrutura do projeto deve ser a seguinte:
@@ -68,14 +65,12 @@ Certifique-se de ter os seguintes softwares instalados em sua máquina:
 ## Como Executar a Aplicação
 
 1. Na raiz do projeto, execute:
-   ```bash
+
    docker-compose up --build
-   ```
 
 2. Verifique se a API está funcionando acessando:
-   ```
+ 
    http://localhost:5000/
-   ```
 
 ## Como Utilizar a API
 
@@ -89,36 +84,32 @@ A API oferece os seguintes endpoints:
 ## Exemplos de Uso
 
 1. Consultar Distrito:
-   ```bash
-   curl "http://localhost:5000/distritos?lat=-23.55052&lon=-46.63331"
-   ```
+ 
+http://localhost:5000/distritos?lat=-23.55052&lon=-46.63331
+
 
 2. Consultar Subprefeitura:
-   ```bash
-   curl "http://localhost:5000/subprefeituras?lat=-23.55052&lon=-46.63331"
-   ```
+
+http://localhost:5000/subprefeituras?lat=-23.55052&lon=-46.63331
+
 
 3. Consultar Distrito e Subprefeitura:
-   ```bash
-   curl "http://localhost:5000/distritos_subprefeituras?lat=-23.55052&lon=-46.63331"
-   ```
+
+http://localhost:5000/distritos_subprefeituras?lat=-23.55052&lon=-46.63331
+
 
 ## Parando os Contêineres
 
 Para parar os contêineres em execução, execute:
 
-```bash
 docker-compose down  
-```
+
 
 ## Limpeza (Opcional)
 
 Para remover todos os contêineres, imagens e volumes associados ao projeto:
 
-```bash
 docker-compose down --rmi all --volumes
-```
-
 
 > **Atenção**: Isso irá remover todos os dados armazenados no banco de dados.
 
