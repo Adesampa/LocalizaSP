@@ -1,0 +1,74 @@
+# API de Geolocalização para São Paulo
+
+Esta API fornece informações sobre distritos e subprefeituras da cidade de São Paulo com base em coordenadas geográficas (latitude e longitude).
+
+## Funcionalidades
+
+- Obter o distrito com base nas coordenadas
+- Obter a subprefeitura com base nas coordenadas
+- Obter tanto o distrito quanto a subprefeitura com base nas coordenadas
+- Verificar o status da API
+
+## Pré-requisitos
+- Git
+- Docker
+- Docker Compose
+
+## Configuração e Execução
+
+1. Clone o repositório:
+   ```
+   git clone git@github.com:Adesampa/LocalizaSP.git
+   cd LocalizaSP
+   ```
+
+3. Execute o Docker Compose para iniciar a aplicação:
+   ```
+   docker-compose up --build
+   ```
+
+A API estará disponível em `http://localhost:5000`.
+
+## Endpoints
+
+- `GET /`: Verifica o status da API
+- `GET /distritos?lat=<latitude>&lon=<longitude>`: Retorna o distrito
+- `GET /subprefeituras?lat=<latitude>&lon=<longitude>`: Retorna a subprefeitura
+- `GET /distritos_subprefeituras?lat=<latitude>&lon=<longitude>`: Retorna o distrito e a subprefeitura
+
+## Exemplos de uso
+
+1. Verificar o status da API:
+   ```
+   curl "http://localhost:5000/"
+   ```
+
+2. Obter o distrito para uma coordenada específica:
+   ```
+   curl "http://localhost:5000/distritos?lat=-23.550520&lon=-46.633309"
+   ```
+
+3. Obter a subprefeitura para uma coordenada específica:
+   ```
+   curl "http://localhost:5000/subprefeituras?lat=-23.550520&lon=-46.633309"
+   ```
+
+4. Obter tanto o distrito quanto a subprefeitura:
+   ```
+   curl "http://localhost:5000/distritos_subprefeituras?lat=-23.550520&lon=-46.633309"
+   ```
+
+Exemplo de resposta:
+
+json
+{
+"Distrito": "SÉ",
+"Subprefeitura": "SÉ"
+}
+
+
+## Notas
+
+- Certifique-se de que as coordenadas fornecidas estejam dentro dos limites da cidade de São Paulo.
+- A API utiliza um banco de dados PostgreSQL com extensão PostGIS para realizar as consultas geoespaciais.
+- Em caso de erro ou coordenadas não encontradas, a API retornará uma mensagem de erro apropriada.
