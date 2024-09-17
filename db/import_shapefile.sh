@@ -11,7 +11,7 @@ echo "Aguardando o PostgreSQL iniciar..."
 echo "Iniciando importação do shapefile..."
 
 # Importa o shapefile usando o shp2pgsql
-shp2pgsql -d -s 4326 -I /app/distritos/distritos.shp public.distritos | psql -U "$POSTGRES_USER" -d "$POSTGRES_DB"
+shp2pgsql -c -s 4326 -I /app/distritos/distritos.shp public.distritos | psql -U "$POSTGRES_USER" -d "$POSTGRES_DB"
 
 echo "Importação concluída."
 
