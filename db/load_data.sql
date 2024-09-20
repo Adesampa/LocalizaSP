@@ -2,7 +2,7 @@
 --CREATE TABLE IF NOT EXISTS distritos (
 --    id SERIAL PRIMARY KEY,
 --    ds_nome VARCHAR(255),
---    ds_subpref VARCHAR(255),
+--   ds_subpref VARCHAR(255),
 --    geom GEOMETRY(MULTIPOLYGON, 4326)
 --);
 

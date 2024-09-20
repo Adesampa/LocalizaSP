@@ -1,16 +1,16 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis version="3.28.15-Firenze">
+<qgis version="3.22.4-Białowieża">
   <identifier></identifier>
   <parentidentifier></parentidentifier>
   <language></language>
-  <type>dataset</type>
+  <type></type>
   <title></title>
   <abstract></abstract>
   <links/>
   <fees></fees>
   <encoding></encoding>
   <crs>
-    <spatialrefsys nativeFormat="Wkt">
+    <spatialrefsys>
       <wkt></wkt>
       <proj4></proj4>
       <srsid>0</srsid>
