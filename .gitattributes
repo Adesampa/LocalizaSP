@@ -1,1 +1,6 @@
 * text eol=lf
+
+# Denote all files that are truly binary and should not be modified.
+*.dbf binary
+*.shp binary
+*.shx binary
