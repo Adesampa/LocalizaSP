@@ -1,4 +1,4 @@
-FROM postgis/postgis:16-3.4
+FROM docker.io/postgis/postgis:16-3.4
 
 # Instala o shp2pgsql e outros utilitários necessários
 RUN apt-get update && \

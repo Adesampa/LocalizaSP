@@ -3,26 +3,27 @@ services:
     build:
       context: ./api
     ports:
-      - "5000:5000"
+      - "${API_PORT:-8000}:5000"
     depends_on:
       - db
     environment:
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_NAME=adesampa
-      - DB_USER=hugo
-      - DB_PASSWORD=adesampa
+      - DB_HOST=${DB_HOST:-db}
+      - DB_PORT=${DB_PORT:-5432}
+      - DB_NAME=${DB_NAME:-adesampa}
+      - DB_USER=${DB_USER:-hugo}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - FLASK_ENV=${FLASK_ENV:-production}
       
   db:
     build:
       context: ./db
     restart: always
     environment:
-      - POSTGRES_DB=adesampa
-      - POSTGRES_USER=hugo
-      - POSTGRES_PASSWORD=adesampa
+      - POSTGRES_DB=${POSTGRES_DB:-adesampa}
+      - POSTGRES_USER=${POSTGRES_USER:-hugo}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
-      - "5432:5432"
+      - "${DB_PORT_EXTERNAL:-5433}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
